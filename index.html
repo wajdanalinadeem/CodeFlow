@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeFlow | AI Code Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .code-bg { background-color: #0f172a; border: 1px solid #1e293b; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-slate-900 text-white font-sans">
+
+    <section class="max-w-6xl mx-auto px-6 py-16 text-center">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6">Stop Copy-Pasting. <span class="gradient-text">Start Flowing.</span></h1>
+        <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
+            The ultimate companion for ChatGPT and Gemini. Manage projects, drag-and-drop snippets, and update code without the "full script" fluff.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="extension.zip" download class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-500/20">
+                Download Extension (.zip)
+            </a>
+            <a href="#setup" class="bg-slate-700 hover:bg-slate-600 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all">
+                One-Time Setup
+            </a>
+        </div>
+    </section>
+
+    <section id="setup" class="max-w-4xl mx-auto px-6 py-12">
+        <div class="bg-slate-800 rounded-3xl p-8 border border-slate-700 shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold">1. Configure Your AI</h2>
+                    <p class="text-slate-400 text-sm">Copy this to ChatGPT or Gemini to enable Smart Edits.</p>
+                </div>
+                <button onclick="copyPrompt()" id="copyBtn" class="bg-blue-500 hover:bg-blue-400 text-white px-6 py-2 rounded-lg text-sm font-bold transition-all">
+                    Copy Prompt
+                </button>
+            </div>
+            
+            <div class="code-bg p-6 rounded-xl font-mono text-sm text-blue-300 relative">
+                <textarea id="aiPrompt" class="hidden">
+From now on, please save these rules to your long-term memory for all our coding interactions. To save bandwidth and time, do not write full scripts when I ask for modifications. Instead, use the following syntax strictly inside your code blocks:
+
+#replace
+[exact old code to remove]
+
+#with
+[new code to insert]
+
+#add
+[new code to add]
+
+Rules for your memory:
+1. All #add, #replace, and #with tags MUST be written inside the code block itself.
+2. Each individual modification must be in its own separate code block.
+3. You may only use one action (#add OR #replace) per code block.
+4. Ensure original indentation is preserved so the extension can merge accurately.
+
+Confirm you have saved these instructions and are ready to use this syntax.
+                </textarea>
+                <div id="displayPrompt" class="whitespace-pre-wrap"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-6 py-12">
+        <h2 class="text-3xl font-bold mb-10 text-center">Core Features</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition-colors">
+                <div class="text-3xl mb-4">📂</div>
+                <h3 class="text-xl font-bold mb-4">Project Panels</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Organize your snippets into dedicated local projects. Open and switch between different codebases without leaving the chat interface.</p>
+            </div>
+            <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition-colors">
+                <div class="text-3xl mb-4">🖱️</div>
+                <h3 class="text-xl font-bold mb-4">Drag & Drop</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Forget manual copy-pasting. Simply grab a code block from the AI's response and drop it directly into your project to save it locally.</p>
+            </div>
+            <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition-colors">
+                <div class="text-3xl mb-4">⚡</div>
+                <h3 class="text-xl font-bold mb-4">Smart Replace</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Using #replace and #add tags, the AI only sends the specific changes. The extension handles the merge, keeping your files clean and updated.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto px-6 py-12 mb-20">
+        <h2 class="text-3xl font-bold mb-8">2. Installation Steps</h2>
+        <div class="grid gap-4">
+            <div class="flex items-center gap-4 p-5 bg-slate-800/50 rounded-xl border border-slate-700">
+                <span class="bg-blue-600/20 text-blue-400 w-10 h-10 rounded-full flex items-center justify-center font-bold shrink-0">1</span>
+                <p class="text-slate-300 text-sm md:text-base">Extract the downloaded <code class="bg-slate-900 px-2 py-1 rounded text-pink-400 italic">extension.zip</code> to a permanent folder.</p>
+            </div>
+            <div class="flex items-center gap-4 p-5 bg-slate-800/50 rounded-xl border border-slate-700">
+                <span class="bg-blue-600/20 text-blue-400 w-10 h-10 rounded-full flex items-center justify-center font-bold shrink-0">2</span>
+                <p class="text-slate-300 text-sm md:text-base">Open your browser and navigate to <code class="bg-slate-900 px-2 py-1 rounded text-pink-400 italic">chrome://extensions</code>.</p>
+            </div>
+            <div class="flex items-center gap-4 p-5 bg-slate-800/50 rounded-xl border border-slate-700">
+                <span class="bg-blue-600/20 text-blue-400 w-10 h-10 rounded-full flex items-center justify-center font-bold shrink-0">3</span>
+                <p class="text-slate-300 text-sm md:text-base">Enable <strong>Developer Mode</strong> using the toggle in the top-right corner.</p>
+            </div>
+            <div class="flex items-center gap-4 p-5 bg-slate-800/50 rounded-xl border border-slate-700">
+                <span class="bg-blue-600/20 text-blue-400 w-10 h-10 rounded-full flex items-center justify-center font-bold shrink-0">4</span>
+                <p class="text-slate-300 text-sm md:text-base">Click <strong>Load unpacked</strong> and select the folder you just extracted.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Set display text for the code block
+        document.getElementById('displayPrompt').innerText = document.getElementById('aiPrompt').value.trim();
+
+        function copyPrompt() {
+            const promptText = document.getElementById('aiPrompt');
+            promptText.classList.remove('hidden'); // Temporarily show to select
+            promptText.select();
+            navigator.clipboard.writeText(promptText.value.trim());
+            promptText.classList.add('hidden'); // Hide again
+            
+            const btn = document.getElementById('copyBtn');
+            btn.innerText = "Copied!";
+            btn.classList.replace('bg-blue-500', 'bg-green-600');
+            
+            setTimeout(() => {
+                btn.innerText = "Copy Prompt";
+                btn.classList.replace('bg-green-600', 'bg-blue-500');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
